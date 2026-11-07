@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      actions: read
+      actions: read # CodeQL reads workflow metadata for analysis
       contents: read
       security-events: write # Required to upload this repository's CodeQL results
     strategy:
