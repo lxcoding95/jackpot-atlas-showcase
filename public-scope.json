@@ -17,9 +17,11 @@
     "SECURITY.md",
     "public-scope.json",
     "tests/test_governance_check.py",
+    "tests/test_incident_tracker.py",
     "tests/test_public_scope.py",
     "tools/__init__.py",
     "tools/check_governance.py",
-    "tools/check_public_scope.py"
+    "tools/check_public_scope.py",
+    "tools/scan_recent_runs.py"
   ]
 }

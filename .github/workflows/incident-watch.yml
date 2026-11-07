@@ -1,43 +1,30 @@
 name: Automation incident tracker
 on:
-  workflow_run:
-    workflows: [CI, CodeQL, Workflow security, Governance drift]
-    types: [completed]
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+concurrency:
+  group: incidents-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
-  issues: write
+  actions: read
 jobs:
-  incident:
-    if: >-
-      github.event.workflow_run.head_repository.full_name == github.repository &&
-      github.event.workflow_run.head_branch == github.event.repository.default_branch &&
-      github.event.workflow_run.conclusion != 'success' &&
-      github.event.workflow_run.conclusion != 'skipped' &&
-      github.event.workflow_run.conclusion != 'cancelled'
+  reconcile:
+    name: Reconcile default-branch incidents
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    env:
-      GH_TOKEN: ${{ github.token }}
-      NAME: ${{ github.event.workflow_run.name }}
-      RUN_URL: ${{ github.event.workflow_run.html_url }}
-      HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+    permissions:
+      contents: read
+      actions: read
+      # Needed to open, refresh, and close incident issues; never edits repository controls.
+      issues: write
     steps:
-      - name: Open one incident for a failed default-branch run
-        shell: bash
-        run: |
-          set -euo pipefail
-          case "$NAME" in
-            'CI'|'CodeQL'|'Workflow security'|'Governance drift') ;;
-            *) exit 1 ;;
-          esac
-          title="Automation incident: ${NAME}"
-          existing="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --limit 100 --json number,title --jq '.[] | select(.title == env.TITLE) | .number' 2>/dev/null || true)"
-          if [ -z "$existing" ]; then
-            export TITLE="$title"
-            existing="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --limit 100 --json number,title --jq '.[] | select(.title == env.TITLE) | .number' | head -n 1)"
-          fi
-          if [ -z "$existing" ]; then
-            gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "A protected default-branch automation run failed. Run: $RUN_URL. Commit: $HEAD_SHA. Repair through a pull request and preserve the failing evidence."
-          else
-            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "Another failed run: $RUN_URL (commit $HEAD_SHA). The incident remains open until inspected and resolved."
-          fi
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Reconcile latest default-branch automation runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 tools/scan_recent_runs.py
