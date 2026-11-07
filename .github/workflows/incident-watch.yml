@@ -6,6 +6,7 @@ on:
 concurrency:
   group: incidents-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+permissions: {}
 jobs:
   reconcile:
     name: Reconcile default-branch incidents
@@ -13,7 +14,7 @@ jobs:
     timeout-minutes: 5
     permissions:
       contents: read
-      actions: read
+      actions: read # Reads workflow run status for incident reconciliation
       # Needed to open, refresh, and close incident issues; never edits repository controls.
       issues: write # Opens and reconciles incidents; cannot edit repository controls
     steps:
