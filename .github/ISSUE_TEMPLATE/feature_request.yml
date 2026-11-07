@@ -1,0 +1,19 @@
+name: Feature request
+description: Suggest a focused improvement to the public showcase.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: Do not propose publishing research code, forecasts, datasets, credentials, or paid services as part of this showcase.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true

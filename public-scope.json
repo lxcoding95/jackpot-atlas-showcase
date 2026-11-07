@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "allowed_tracked_files": [
+    ".github/ISSUE_TEMPLATE/bug_report.yml",
+    ".github/ISSUE_TEMPLATE/feature_request.yml",
+    ".github/dependabot.yml",
+    ".github/workflows/ci.yml",
+    ".github/workflows/codeql.yml",
+    ".github/workflows/governance-drift.yml",
+    ".github/workflows/incident-watch.yml",
+    ".github/workflows/zizmor.yml",
+    ".gitignore",
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "SECURITY.md",
+    "public-scope.json",
+    "tests/test_governance_check.py",
+    "tests/test_public_scope.py",
+    "tools/__init__.py",
+    "tools/check_governance.py",
+    "tools/check_public_scope.py"
+  ]
+}
