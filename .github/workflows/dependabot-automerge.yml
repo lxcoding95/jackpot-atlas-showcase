@@ -1,34 +1,27 @@
 name: Dependabot patch auto-merge
 on:
-  pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review]
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
 permissions: {}
 concurrency:
-  group: dependabot-${{ github.event.pull_request.number }}
+  group: dependabot-patch-automerge
   cancel-in-progress: true
 jobs:
   enable-patch-automerge:
-    name: Enable patch auto-merge
-    if: >-
-      github.event.pull_request.user.login == 'dependabot[bot]' &&
-      github.repository == 'lxcoding95/jackpot-atlas-showcase' &&
-      github.event.pull_request.base.ref == 'main' &&
-      startsWith(github.event.pull_request.head.ref, 'dependabot/github_actions/') &&
-      github.event.pull_request.draft == false
+    name: Enable verified patch auto-merge
+    if: github.repository == 'lxcoding95/jackpot-atlas-showcase' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
-      contents: write # Enables GitHub auto-merge; the ruleset still blocks until every required check passes.
-      pull-requests: write # Only adds auto-merge to a verified Dependabot patch PR.
+      contents: write # GitHub auto-merge remains blocked until the main ruleset checks pass.
+      pull-requests: write # Only selected Dependabot patch PRs are eligible.
     steps:
-      - name: Verify Dependabot update metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          github-token: ${{ github.token }}
-      - name: Enable auto-merge for patch updates only
-        if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+          persist-credentials: false
+      - name: Enable auto-merge only for eligible patch updates
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
-        run: gh pr merge --auto --squash "$PR_URL"
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 tools/enable_dependabot_patch_automerge.py

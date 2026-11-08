@@ -3,9 +3,9 @@
 ## Routine work handled by automation
 
 - Pushes and pull requests run the standard-library tests, the public-scope manifest check, CodeQL for the small Python helper, and zizmor workflow analysis. `main` requires all four named checks.
-- Dependabot checks GitHub Actions weekly, waits seven days before proposing updates, and opens pull requests. Patch updates may have auto-merge enabled; GitHub merges only after all required checks pass. Minor, major, unclassified, or failing updates stay open.
+- Dependabot checks GitHub Actions weekly, waits seven days before proposing updates, and opens pull requests. A six-hourly trusted-main workflow enables auto-merge only for bot-authored, non-draft PRs targeting `main` whose title contains a strict semver patch increase. SHA-only, minor, major, grouped, or unclassified updates stay open. GitHub merges only after all required ruleset checks pass.
 - A read-only governance check runs for pull requests and weekly. A separate 30-minute tracker reads the latest default-branch workflow runs, opens or refreshes incidents, and closes one only after a successful run on the current `main` commit.
-- The tracker can create and close issues. It cannot change repository visibility, permissions, rulesets, secrets, or workflow settings. It does not repair those controls automatically.
+- The tracker can create and close issues. It cannot change repository visibility, permissions, rulesets, secrets, or workflow settings. It does not repair those controls automatically. The workflow token also cannot read owner-only settings such as auto-merge and branch cleanup; these remain owner-verified controls rather than being reported falsely by CI.
 
 ## Single-maintainer merge model
 
