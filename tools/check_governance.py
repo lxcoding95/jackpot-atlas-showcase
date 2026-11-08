@@ -8,10 +8,10 @@ import urllib.request
 
 API = "https://api.github.com"
 EXPECTED_CHECKS = {
-    "CI / tests (pull_request)",
-    "CodeQL / Analyze (python) (pull_request)",
-    "Workflow security / Audit workflows (pull_request)",
-    "Governance drift / Verify repository controls (pull_request)",
+    "tests",
+    "Analyze (python)",
+    "Audit workflows",
+    "Verify repository controls",
 }
 
 
