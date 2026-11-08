@@ -15,7 +15,8 @@ PATCH_TITLE = re.compile(
 
 
 def eligible(pr: dict) -> bool:
-    if pr.get("author", {}).get("login") != "dependabot[bot]":
+    author = pr.get("author", {})
+    if author.get("login") != "app/dependabot" or author.get("is_bot") is not True:
         return False
     if pr.get("baseRefName") != "main" or pr.get("isDraft") is not False:
         return False

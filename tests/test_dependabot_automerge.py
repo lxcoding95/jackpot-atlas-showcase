@@ -5,7 +5,7 @@ from tools.enable_dependabot_patch_automerge import eligible
 
 def pr(title, **overrides):
     value = {
-        "author": {"login": "dependabot[bot]"},
+        "author": {"login": "app/dependabot", "is_bot": True},
         "baseRefName": "main",
         "headRefName": "dependabot/github_actions/actions/checkout-7.0.2",
         "isDraft": False,
@@ -24,7 +24,8 @@ class DependabotAutoMergeTests(unittest.TestCase):
             pr("Bump actions/checkout from 7.0.1 to 7.1.0"),
             pr("Bump actions/checkout from 7.0.1 to 8.0.0"),
             pr("Bump actions/checkout from abc123 to def456"),
-            pr("Bump actions/checkout from 7.0.1 to 7.0.2", author={"login": "attacker"}),
+            pr("Bump actions/checkout from 7.0.1 to 7.0.2", author={"login": "attacker", "is_bot": False}),
+            pr("Bump actions/checkout from 7.0.1 to 7.0.2", author={"login": "dependabot[bot]", "is_bot": True}),
             pr("Bump actions/checkout from 7.0.1 to 7.0.2", baseRefName="feature"),
             pr("Bump actions/checkout from 7.0.1 to 7.0.2", isDraft=True),
             pr("Bump actions/checkout from 7.0.2 to 7.0.1"),
