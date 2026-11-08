@@ -19,3 +19,21 @@ The repository's GitHub **Sponsorships** setting may be enabled, but that does *
 GitHub Sponsors onboarding, financial identity, taxes and payout approval belong to the account owner. No fee, bank account, subscription, product entitlement or donation destination is operated by this repository.
 
 Official setup guidance: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+## Initial welcome discussion — one-time owner posting
+
+**Category:** General
+
+**Title:** Welcome to Jackpot Atlas Engineering Showcase — scope, contributions and automation
+
+**Body to copy:**
+
+> Welcome to the public Jackpot Atlas Engineering Showcase! This repository shares a minimal, MIT-licensed example of Python tests, SHA-pinned GitHub Actions, CodeQL, workflow security, protected pull requests and cautious automation. It does not publish lottery predictions, live draw datasets or the private application.
+>
+> Ask questions and share ideas about the **public** workflows and documentation here. For reproducible defects, use Issues; for changes, propose a small pull request with tests. Please keep private files, credentials, personal information and sensitive security reports out of public conversations.
+>
+> Automation can verify and report; it cannot replace human decisions on security incidents, rights, identity, funding or external publishing. We welcome transparent proposals that improve reliability, accessibility and cost control without weakening the project's boundaries.
+>
+> Start with the [README](https://github.com/lxcoding95/jackpot-atlas-showcase#readme), [automation model](https://github.com/lxcoding95/jackpot-atlas-showcase/blob/main/docs/AUTOMATION_OPERATING_MODEL.md) and [community guidance](https://github.com/lxcoding95/jackpot-atlas-showcase/blob/main/docs/COMMUNITY_AND_SPONSORING.md).
+
+The first post requires the owner's initial GitHub Discussion submission. The repository API connection cannot create a Discussion through the available issue/pull-request actions. Once posted, later Discussions use the General/Ideas forms and do not need duplicate canonical documentation.
