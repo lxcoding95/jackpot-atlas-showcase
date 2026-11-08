@@ -7,7 +7,12 @@ import urllib.error
 import urllib.request
 
 API = "https://api.github.com"
-EXPECTED_CHECKS = {"CI / tests", "CodeQL / Analyze (python)", "Workflow security / Audit workflows", "Governance drift / Verify repository controls"}
+EXPECTED_CHECKS = {
+    "tests",
+    "Analyze (python)",
+    "Audit workflows",
+    "Verify repository controls",
+}
 
 
 def get(path: str):
@@ -25,8 +30,9 @@ def verify(repository: str) -> list[str]:
     if repo.get("visibility") != "public": problems.append("repository visibility is not public")
     if repo.get("default_branch") != "main": problems.append("default branch is not main")
     if repo.get("has_issues") is not True: problems.append("Issues are disabled")
-    if repo.get("allow_auto_merge") is not True: problems.append("auto-merge is disabled")
-    if repo.get("delete_branch_on_merge") is not True: problems.append("head-branch cleanup is disabled")
+    # GitHub's short-lived GITHUB_TOKEN does not have administration:read and
+    # masks owner-only repository settings such as allow_auto_merge as false.
+    # Those settings are verified through the owner CLI/API, not guessed here.
     if repo.get("archived") is True: problems.append("repository is archived")
     rulesets = get(f"/repos/{repository}/rulesets")
     ruleset = next((item for item in rulesets if item.get("name") == "main-governance"), None)
@@ -43,7 +49,9 @@ def verify(repository: str) -> list[str]:
         else:
             contexts = {entry.get("context") for entry in checks_rule.get("parameters", {}).get("required_status_checks", [])}
             missing = EXPECTED_CHECKS - contexts
-            if missing: problems.append("required checks missing: " + ", ".join(sorted(missing)))
+            if missing:
+                print("Observed required check contexts: " + ", ".join(sorted(contexts)))
+                problems.append("required checks missing: " + ", ".join(sorted(missing)))
         pr_rule = next((rule for rule in rules if rule.get("type") == "pull_request"), None)
         if not pr_rule:
             problems.append("pull request rule is missing")

@@ -1,0 +1,27 @@
+name: Dependabot patch auto-merge
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: dependabot-patch-automerge
+  cancel-in-progress: true
+jobs:
+  enable-patch-automerge:
+    name: Enable verified patch auto-merge
+    if: github.repository == 'lxcoding95/jackpot-atlas-showcase' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write # GitHub auto-merge remains blocked until the main ruleset checks pass.
+      pull-requests: write # Only selected Dependabot patch PRs are eligible.
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Enable auto-merge only for eligible patch updates
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 tools/enable_dependabot_patch_automerge.py
