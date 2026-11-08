@@ -9,7 +9,7 @@ A small, public companion repository that demonstrates a careful, low-cost GitHu
 - ✅ Pull-request-first changes with required automated checks
 - 🔍 Public-repository CodeQL analysis and workflow linting
 - 🔐 GitHub secret scanning and push protection, where enabled by GitHub for public repositories
-- 🤖 Dependabot proposals for GitHub Actions
+- 🤖 Weekly Dependabot updates with a seven-day cooldown; only verified patch updates can auto-merge after all required checks pass
 - 🧾 An explicit, tested public-content allowlist
 - 📣 Scheduled governance drift checks and issue-based alerts
 - 💸 No paid Actions, hosted AI reviewer, or external runtime dependency
