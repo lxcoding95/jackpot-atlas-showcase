@@ -49,7 +49,9 @@ def verify(repository: str) -> list[str]:
         else:
             contexts = {entry.get("context") for entry in checks_rule.get("parameters", {}).get("required_status_checks", [])}
             missing = EXPECTED_CHECKS - contexts
-            if missing: problems.append("required checks missing: " + ", ".join(sorted(missing)))
+            if missing:
+                print("Observed required check contexts: " + ", ".join(sorted(contexts)))
+                problems.append("required checks missing: " + ", ".join(sorted(missing)))
         pr_rule = next((rule for rule in rules if rule.get("type") == "pull_request"), None)
         if not pr_rule:
             problems.append("pull request rule is missing")
