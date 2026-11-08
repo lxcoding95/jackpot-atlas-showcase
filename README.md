@@ -1,53 +1,52 @@
-# 🎰 Jackpot Atlas — Engineering Showcase
+# Jackpot Atlas — Public Engineering Showcase
 
-A small, public companion repository that demonstrates a careful, low-cost GitHub workflow for a single-maintainer software project.
+[![CI](https://github.com/lxcoding95/jackpot-atlas-showcase/actions/workflows/ci.yml/badge.svg)](https://github.com/lxcoding95/jackpot-atlas-showcase/actions/workflows/ci.yml) [![CodeQL](https://github.com/lxcoding95/jackpot-atlas-showcase/actions/workflows/codeql.yml/badge.svg)](https://github.com/lxcoding95/jackpot-atlas-showcase/actions/workflows/codeql.yml) [![Workflow security](https://github.com/lxcoding95/jackpot-atlas-showcase/actions/workflows/zizmor.yml/badge.svg)](https://github.com/lxcoding95/jackpot-atlas-showcase/actions/workflows/zizmor.yml) [![Governance](https://github.com/lxcoding95/jackpot-atlas-showcase/actions/workflows/governance-drift.yml/badge.svg)](https://github.com/lxcoding95/jackpot-atlas-showcase/actions/workflows/governance-drift.yml)
 
-> **Scope:** this repository contains governance examples and a tiny documentation-scope check. It does not contain lottery research, prediction methods, historical forecasts, datasets, app binaries, or credentials. It makes no claim that any lottery outcome can be predicted.
+**A deliberately small, free-tier-first engineering example for a single-maintainer GitHub repository.** It demonstrates reproducible tests, pinned GitHub Actions, security checks, exact public-content boundaries, guarded dependency updates and incident reporting.
 
-## ✨ What this repository demonstrates
+> **Scope:** This is **not** the Jackpot Atlas lottery application. No private research source, historical forecasts, actual ticket fields, draw datasets, credentials, customer data, binaries or lottery predictions are published here. Neither this repo nor its badges demonstrate a higher probability of a lottery win.
 
-- ✅ Pull-request-first changes with required automated checks
-- 🔍 Public-repository CodeQL analysis and workflow linting
-- 🔐 GitHub secret scanning and push protection, where enabled by GitHub for public repositories
-- 🤖 Weekly Dependabot updates with a seven-day cooldown; only verified patch updates can auto-merge after all required checks pass
-- 🧾 An explicit, tested public-content allowlist
-- 📣 Scheduled governance drift checks and issue-based alerts
-- 💸 No paid Actions, hosted AI reviewer, or external runtime dependency
+## Explore
 
-A single owner can merge a pull request after independent automated gates pass. The repository does **not** pretend that this is a human review. High-impact publication, identity, legal, signing, billing, and account-permission decisions remain owner-controlled.
+| Area | What you will find |
+| --- | --- |
+| [Code](https://github.com/lxcoding95/jackpot-atlas-showcase) | Minimal Python tooling, tests and a public allowlist |
+| [Actions](https://github.com/lxcoding95/jackpot-atlas-showcase/actions) | Live results and scheduling of six independent workflows |
+| [Security](https://github.com/lxcoding95/jackpot-atlas-showcase/security) | Security policy, CodeQL, workflow auditing and vulnerability reporting |
+| [Issues](https://github.com/lxcoding95/jackpot-atlas-showcase/issues) | Reproducible defects and automatically reconciled incidents |
+| [Pull requests](https://github.com/lxcoding95/jackpot-atlas-showcase/pulls) | Protected, test-gated improvements |
+| [Discussions](https://github.com/lxcoding95/jackpot-atlas-showcase/discussions) | Questions and free-software engineering ideas |
+| [Wiki starter](docs/WIKI_HOME.md) | The canonical first-page content and links into maintained docs |
+| [Automation model](docs/AUTOMATION_OPERATING_MODEL.md) | Controls, real autonomy limits, owner-only gates |
 
-## 🚀 Start here
+## Security and self-maintenance model
 
-1. Read [Contributing](CONTRIBUTING.md) before opening a pull request.
-2. Read [Security](SECURITY.md) before reporting a vulnerability.
-3. Run the checks locally: `python -m unittest discover -s tests -v`.
-4. Open a pull request. CI, CodeQL, and the workflow audit must pass before merge.
+Every proposed change must respect the [main-governance ruleset](https://github.com/lxcoding95/jackpot-atlas-showcase/rules/26778676): a pull request, **four passing required checks**, resolved threads, squash merge, linear history and no force-pushes, branch deletion or bypass users. This single-owner demo does not fabricate a second human review.
 
-## 🧰 Free automation model
+- **CI:** Python standard-library unit tests and exact `public-scope.json` tracked-file guard.
+- **CodeQL + zizmor:** pinned dependency-SHA security checks for the small Python tool and workflow files.
+- **Dependabot:** weekly dependency update proposals with seven-day cooldown. Only strictly eligible bot-authored patch changes are selected for GitHub-native auto-merge **after** all required checks pass. Other changes stay reviewable.
+- **Governance drift + incident tracker:** check rules/settings, monitor actions and create/close issues for verifiable incidents; **never** rewrite repository permissions, silently suppress scanner failures or guess a repair.
 
-| Area | Automation | Boundary |
-| --- | --- | --- |
-| Code and docs | GitHub Actions, Python standard library | Read-only token by default; no automatic merge on failed or missing checks |
-| Static analysis | CodeQL for the small Python utility; zizmor for Actions workflows | Findings require a reviewed fix; no suppression without explanation |
-| Secrets | GitHub public-repository secret scanning and push protection, plus local checks | Never commit credentials; rotate a credential if exposure is suspected |
-| Dependencies | Dependabot weekly Actions updates | Updates arrive as pull requests and must pass checks |
-| Governance | Weekly read-only settings drift check; creates an incident issue on failure | Detection is automatic; permission changes are not self-applied |
-| Releases and stores | No release pipeline is enabled | Owner identity, signing, platform agreements, and release approval stay gated |
+**Operational limit:** GitHub may delay/drop scheduled Actions, and in an inactive public repository GitHub can disable them after **60 days**. No GitHub-only configuration can promise permanent, unattended execution; details and recovery steps are in [Automation model](docs/AUTOMATION_OPERATING_MODEL.md).
 
-GitHub-hosted Actions usage and limits can change. Review current account billing before adding workflows with large runtimes or artifacts.
+## Contribute or ask a question
 
-## 🗺️ Roadmap
+Use [Discussions](https://github.com/lxcoding95/jackpot-atlas-showcase/discussions) for questions/ideas, [Issues](https://github.com/lxcoding95/jackpot-atlas-showcase/issues/new/choose) for demonstrable public defects, and [Pull requests](https://github.com/lxcoding95/jackpot-atlas-showcase/pulls) for fixes. Read [Contributing](CONTRIBUTING.md), [Community and sponsorship](docs/COMMUNITY_AND_SPONSORING.md), and [Security](SECURITY.md). Do not expose credentials or private research in public threads.
 
-- [x] Publish a small, deliberately scoped engineering showcase
-- [x] Keep research and forecast material in its separate private repository
-- [ ] Add any future reusable example only after license, privacy, and history review
-- [ ] Design app packaging and store submissions only when the product is ready
+For local, offline reproducibility:
 
-## 📜 License and reuse
+```bash
+python3 tools/check_public_scope.py
+python3 -m unittest discover -s tests -v
+```
 
-The new material in this showcase is offered under the MIT License. See [LICENSE](LICENSE). That license applies only to this repository's original files. It does not change the license or publication status of the separate private research repository or any third-party material.
+## Releases, packages and planning
 
-## 🧭 Project links
+No executable/public app artifact exists here, so **Releases** and **Packages** are intentionally empty. A fabricated package or release would be misleading. Similarly, an empty **Projects/Milestones** view does not indicate failed governance; introduce a board only when the public repo has enough genuine scoped work to justify ongoing maintenance. See [Owner operations](docs/OWNER_OPERATIONS.md) for current capabilities and owner-only decisions.
 
-- Private research project: [lxcoding95/jackpot-atlas](https://github.com/lxcoding95/jackpot-atlas)
-- No predictions, forecasts, datasets, or research implementation are published here.
+## Sources, rights and boundaries
+
+The repository's original work is offered under the [MIT License](LICENSE), without licensing private code or third-party material. [API source assessment](docs/API_SOURCES_REVIEW_2026.md) explains why optional scholarly metadata feeds are not authoritative lottery-results feeds.
+
+**[GitHub governance and automation docs](docs/OWNER_OPERATIONS.md)** · [GitHub Ruleset](https://github.com/lxcoding95/jackpot-atlas-showcase/rules/26778676) · [Recent workflow runs](https://github.com/lxcoding95/jackpot-atlas-showcase/actions)

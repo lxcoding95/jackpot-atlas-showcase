@@ -1,0 +1,21 @@
+title: "[Question] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Welcome to the **public engineering showcase**. This space is for its open-source GitHub governance examples, not private research, lottery forecasts, access requests, or sensitive security reports. For a suspected vulnerability, follow SECURITY.md.
+  - type: textarea
+    id: topic
+    attributes:
+      label: Question or topic
+      description: Explain the public documentation or automation you want to discuss.
+      placeholder: What would you like to clarify or improve?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Relevant public links or context
+      description: Include only non-sensitive public URLs. Never include credentials, private code, or personal information.
+    validations:
+      required: false

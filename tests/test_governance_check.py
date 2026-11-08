@@ -14,5 +14,16 @@ class GovernanceCheckTests(unittest.TestCase):
         self.assertIn("main-governance ruleset is missing", problems)
 
 
+
+    def test_community_surfaces_are_checked_when_github_explicitly_disables_them(self):
+        with patch("tools.check_governance.get", side_effect=[
+            {"visibility": "public", "default_branch": "main", "has_issues": True,
+             "has_wiki": False, "has_discussions": False, "archived": False},
+            []
+        ]):
+            problems = verify("owner/repo")
+        self.assertIn("Wiki is disabled", problems)
+        self.assertIn("Discussions are disabled", problems)
+
 if __name__ == "__main__":
     unittest.main()
