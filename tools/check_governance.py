@@ -7,7 +7,12 @@ import urllib.error
 import urllib.request
 
 API = "https://api.github.com"
-EXPECTED_CHECKS = {"CI / tests", "CodeQL / Analyze (python)", "Workflow security / Audit workflows", "Governance drift / Verify repository controls"}
+EXPECTED_CHECKS = {
+    "CI / tests (pull_request)",
+    "CodeQL / Analyze (python) (pull_request)",
+    "Workflow security / Audit workflows (pull_request)",
+    "Governance drift / Verify repository controls (pull_request)",
+}
 
 
 def get(path: str):
