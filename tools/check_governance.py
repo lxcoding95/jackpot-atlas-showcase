@@ -30,6 +30,10 @@ def verify(repository: str) -> list[str]:
     if repo.get("visibility") != "public": problems.append("repository visibility is not public")
     if repo.get("default_branch") != "main": problems.append("default branch is not main")
     if repo.get("has_issues") is not True: problems.append("Issues are disabled")
+    # Distinguish public feature availability from whether the first page/thread
+    # has been created. A missing or non-admin-hidden flag is never guessed.
+    if repo.get("has_wiki") is False: problems.append("Wiki is disabled")
+    if repo.get("has_discussions") is False: problems.append("Discussions are disabled")
     # GitHub's short-lived GITHUB_TOKEN does not have administration:read and
     # masks owner-only repository settings such as allow_auto_merge as false.
     # Those settings are verified through the owner CLI/API, not guessed here.

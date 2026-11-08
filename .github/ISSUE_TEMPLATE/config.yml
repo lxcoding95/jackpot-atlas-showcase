@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas — GitHub Discussions
+    url: https://github.com/lxcoding95/jackpot-atlas-showcase/discussions
+    about: Use Discussions for questions, reusable ideas and documentation feedback.
+  - name: Report a security concern privately
+    url: https://github.com/lxcoding95/jackpot-atlas-showcase/security/policy
+    about: Follow the private vulnerability-reporting guidance. Never post exploit details or secrets in public.

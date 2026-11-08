@@ -1,0 +1,32 @@
+title: "[Idea] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggest a reusable improvement to this **public** security/governance showcase. Ideas are discussed before any scoped issue or pull request is opened. Never disclose private Jackpot Atlas research, predictions, data, customer details, or credentials.
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Improvement area
+      options:
+        - Automated testing and code quality
+        - Supply-chain security
+        - Governance and maintainability
+        - Documentation and accessibility
+        - Free-tier cost controls
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Problem and proposed change
+      placeholder: Describe the current behavior, a small improvement, and why it benefits this public repository.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: How could we verify the improvement?
+      description: Suggest a reproducible test and a cost-free maintenance strategy.
+    validations:
+      required: false

@@ -32,3 +32,13 @@ This repository is a clean-room governance example. Do not import research sourc
 4. Wait for CI, CodeQL, workflow security, and governance checks.
 5. Merge with squash or enable auto-merge from `gh` only when every required check is green.
 6. The tracker closes the incident only after a passing run for the current default-branch commit.
+
+## Public Wiki, Discussions and funding activation
+
+The repository currently exposes Wiki and Discussions. They do not automatically contain useful content after their setting is enabled. GitHub requires an initial Wiki Home page: see `docs/WIKI_HOME.md` for intentionally minimal navigation content. GitHub Discussions likewise needs an initial human-authored welcome thread; General/Ideas templates keep later questions focused. Security reports must go through private reporting, not public discussions.
+
+The Sponsorships checkbox is not a valid payment destination. Do not add FUNDING.yml until a recipient is verified, eligible, and explicitly authorized by the account owner. An account-level payout or tax onboarding cannot be safely performed by repository Actions.
+
+GitHub may disable scheduled public-repository workflows after 60 days without repository activity; timers may also be delayed or dropped. Never create synthetic no-op commits to simulate activity. The scripts work when GitHub triggers them; they do not constitute a guarantee of permanent unattended operation.
+
+See `docs/AUTOMATION_OPERATING_MODEL.md` for exact allowed automation, reports and boundaries. Empty Releases/Packages/Projects/Milestones are intentional while there is no legitimate public artifact or tracking workload.
